@@ -175,3 +175,5 @@ if __name__ == "__main__":
     Image.fromarray(grid.astype(np.uint8)).save(os.path.join(outpath, f'{prompt.replace(" ", "-")}.jpg'))
 
     print(f"Your samples are ready and waiting four you here: \n{outpath} \nEnjoy.")
+
+    

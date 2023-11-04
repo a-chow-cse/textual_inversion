@@ -137,6 +137,10 @@ class EmbeddingManager(nn.Module):
 
         self.string_to_token_dict = ckpt["string_to_token"]
         self.string_to_param_dict = ckpt["string_to_param"]
+    
+    def load_from_script(self, ckpt ):
+        self.string_to_token_dict = ckpt["string_to_token"]
+        self.string_to_param_dict = ckpt["string_to_param"]
 
     def get_embedding_norms_squared(self):
         all_params = torch.cat(list(self.string_to_param_dict.values()), axis=0) # num_placeholders x embedding_dim
