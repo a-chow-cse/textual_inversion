@@ -58,14 +58,14 @@ def setup_parser():
     parser.add_argument(
         "--H",
         type=int,
-        default=256,
+        default=32,
         help="image height, in pixel space",
     )
 
     parser.add_argument(
         "--W",
         type=int,
-        default=256,
+        default=32,
         help="image width, in pixel space",
     )
 
@@ -140,9 +140,9 @@ def load_model_from_config(config, ckpt, verbose=False):
     model.eval()
     return model
 
-def generate_images_and_returnNumpyArray(prompt, 
+def generate_images_and_returnNumpyArray(prompt,
     ddim_steps, model, all_embeddings_ckpt, class_name, step,cluster,n_samples,n_iter,
-    scale=10.0,ddim_eta=0.0,H=256,W=256):
+    scale=10.0,ddim_eta=0.0,H=32,W=32):
 
     sampler = DDIMSampler(model)
     with torch.no_grad():
@@ -153,6 +153,7 @@ def generate_images_and_returnNumpyArray(prompt,
             for n in trange(n_iter, desc="Sampling"):
                 c = model.get_learned_conditioning(n_samples * [prompt])
                 shape = [4, H//8, W//8]
+                shape = [4, H, W]
                 samples_ddim, _ = sampler.sample(S=ddim_steps,
                                                  conditioning=c,
                                                  batch_size=n_samples,
@@ -201,7 +202,7 @@ def generate_images_save(model, opt):
                 uc = model.get_learned_conditioning(opt.n_samples * [""])
             for n in trange(opt.n_iter, desc="Sampling"):
                 c = model.get_learned_conditioning(opt.n_samples * [prompt])
-                shape = [4, opt.H//8, opt.W//8]
+                shape = [4, opt.H, opt.W]
                 samples_ddim, _ = sampler.sample(S=opt.ddim_steps,
                                                  conditioning=c,
                                                  batch_size=opt.n_samples,

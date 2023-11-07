@@ -50,8 +50,8 @@ class Upsample(nn.Module):
                                         stride=1,
                                         padding=1)
 
-    def forward(self, x):
-        x = torch.nn.functional.interpolate(x, scale_factor=2.0, mode="nearest")
+    def forward(self, x,scale=2.0):
+        x = torch.nn.functional.interpolate(x, scale_factor=scale, mode="nearest")
         if self.with_conv:
             x = self.conv(x)
         return x
@@ -554,7 +554,7 @@ class Decoder(nn.Module):
                 if len(self.up[i_level].attn) > 0:
                     h = self.up[i_level].attn[i_block](h)
             if i_level != 0:
-                h = self.up[i_level].upsample(h)
+                h = self.up[i_level].upsample(h,scale=1.0)
 
         # end
         if self.give_pre_end:
