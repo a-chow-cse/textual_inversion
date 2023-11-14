@@ -16,6 +16,8 @@ print(a['string_to_param']['*'])
 print(sys.getsizeof(a['string_to_param']['*']))
 print(a['string_to_param']['*'].element_size()*a['string_to_param']['*'].nelement())
 """
+
+"""
 word="skunk"
 from transformers import CLIPTokenizer
 tokenizer = CLIPTokenizer.from_pretrained("openai/clip-vit-base-patch32")
@@ -31,3 +33,12 @@ print(tokens)
 #hamster= mammal
 #shrew=mammal
 #skunk=mammal
+"""
+
+import torch
+a = b =torch.rand(1, 1280)
+c=torch.rand(1,1280)
+print(a,b,c)
+print(torch.stack([a, b, c]))
+result = torch.mean(torch.stack([a, b, c]), dim=0)
+print(result)

@@ -7,12 +7,14 @@ subdirectories = [os.path.join(directory_path, d) for d in os.listdir(directory_
 
 cifar100_train = datasets.CIFAR100(root='./data', train=True, download=True)
 class_names= cifar100_train.classes
+class_names=['road', 'palm_tree', 'snake', 'bicycle', 'cloud', 'table', 'train', 'rabbit', 'shrew', 'skyscraper']
 
-steps=[499,999,1499]
-cluster_names=["cluster_0", "cluster_1", "cluster_2"]
+steps=[49,99,149]
+cluster_names=["cluster_0", "cluster_1", "cluster_2","cluster_3", "cluster_4", "cluster_5","cluster_6", "cluster_7", "cluster_8", "cluster_9"]
 
-output_pth_path = 'cifar_trained_embeddings.pth'
+output_pth_path = 'cifar_trained_embeddings_task_0_cluster_10_step49_99_149_not_clip.pth'
 embeddings_to_save={}
+
 
 for class_name in class_names:
 
@@ -24,7 +26,7 @@ for class_name in class_names:
 
         for cluster_name in cluster_names:
 
-            str_to_find="_"+class_name+"_30_"+cluster_name
+            str_to_find="_"+class_name+"_5_"+cluster_name
             folder_names = [d for d in subdirectories if str_to_find in os.path.basename(d).lower()]
 
             if len(folder_names)!=1: #if there is no folder with that class name and cluster number

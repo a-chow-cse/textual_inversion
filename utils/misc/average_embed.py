@@ -15,9 +15,9 @@ emb_1499=None
 for folder_name in absolute_paths:
     checkpoint_path= folder_name+"/checkpoints/"
     print(checkpoint_path)
-    emb_499_path=checkpoint_path+"embeddings_gs-499.pt"
-    emb_999_path=checkpoint_path+"embeddings_gs-999.pt"
-    emb_1499_path=checkpoint_path+"embeddings_gs-1499.pt"
+    emb_499_path=checkpoint_path+"embeddings_gs-49.pt"
+    emb_999_path=checkpoint_path+"embeddings_gs-99.pt"
+    emb_1499_path=checkpoint_path+"embeddings_gs-149.pt"
 
     if os.path.exists(emb_499_path):
         print(emb_499_path)
@@ -44,8 +44,8 @@ for folder_name in absolute_paths:
     
 
 emb_499['string_to_param']['*'] = torch.nn.Parameter(emb_499['string_to_param']['*'] /3)
-emb_999['string_to_param']['*'] = torch.nn.Parameter(emb_499['string_to_param']['*'] /3)
-emb_1499['string_to_param']['*'] = torch.nn.Parameter(emb_499['string_to_param']['*'] /3)
+emb_999['string_to_param']['*'] = torch.nn.Parameter(emb_999['string_to_param']['*'] /3)
+emb_1499['string_to_param']['*'] = torch.nn.Parameter(emb_1499['string_to_param']['*'] /3)
 
 torch.save(emb_499, "../emb_avg_499.pt")
 torch.save(emb_999, "../emb_avg_999.pt")
